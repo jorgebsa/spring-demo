@@ -29,3 +29,5 @@ jobs:
       with:
         files: ./build/reports/jacoco/test/jacocoTestReport.xml
         verbose: true
+    - name: Check for possible code coverage violations
+      run: ./gradlew jacocoTestCoverageVerification

@@ -10,25 +10,9 @@ java {
     }
 }
 
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
-    options.compilerArgs.add("-parameters")
-}
-
-tasks.test {
-    useJUnitPlatform()
-    finalizedBy(tasks.jacocoTestReport)
-}
-
 application {
     mainClass.set("com.example.kore.spring.Application")
     applicationDefaultJvmArgs = listOf("-Dspring.profiles.active=localhost")
-}
-
-tasks.jacocoTestReport {
-    reports {
-        xml.required.set(true)
-    }
 }
 
 repositories {
@@ -52,4 +36,30 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:mongodb")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+    options.compilerArgs.add("-parameters")
+}
+
+tasks.test {
+    useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+    }
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.99".toBigDecimal()
+            }
+        }
+    }
 }
