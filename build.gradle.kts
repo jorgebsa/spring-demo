@@ -25,6 +25,12 @@ application {
     applicationDefaultJvmArgs = listOf("-Dspring.profiles.active=localhost")
 }
 
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+    }
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
