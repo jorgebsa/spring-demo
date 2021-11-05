@@ -47,7 +47,7 @@ public record Violation(String field, String message) {
     private static List<Map<String, String>> asMaps(Stream<Violation> violations) {
         return violations.sorted(COMPARATOR)
                 .map(Violation::asMap)
-                .collect(toList());
+                .toList();
     }
 
 }

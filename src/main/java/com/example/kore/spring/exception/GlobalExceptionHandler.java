@@ -46,7 +46,9 @@ class GlobalExceptionHandler {
                     var path = v.getPropertyPath().toString();
                     var idx = path.lastIndexOf('.') + 1;
                     return new Violation(path.substring(idx), v.getMessage());
-                }).toList();
+                })
+                .sorted(Violation.COMPARATOR)
+                .toList();
         log.debug("Violations: {}", violations);
         return buildResponse(status, violations);
     }

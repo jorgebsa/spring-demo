@@ -33,6 +33,10 @@ public class Note {
     public Note() {
     }
 
+    public Note(String id) {
+        this.id = id;
+    }
+
     public Note(String username, String content) {
         this.username = username;
         this.content = content;

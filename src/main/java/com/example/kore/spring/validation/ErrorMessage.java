@@ -1,7 +1,5 @@
 package com.example.kore.spring.validation;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
@@ -11,10 +9,6 @@ public record ErrorMessage(String timestamp, int status, Object errors) {
 
     public ErrorMessage(int status, Object errors) {
         this(ZonedDateTime.ofInstant(now(), ZoneId.systemDefault()).toString(), status, errors);
-    }
-
-    @JsonCreator
-    public ErrorMessage {
     }
 
 }
