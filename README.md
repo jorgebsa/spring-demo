@@ -49,6 +49,8 @@ docker-compose down
 
 ### TO DO!!
 
+* Add more MongoDB queries
+  * Right now there's only findById and findPage, but there are many queries that can be added in order to filter the results, such as querying by creation date of last modified date in a range for example
 * Add more integration tests (++coverage!)
   * Test all possible branches
   * Include tests for failures, such as POST requests with invalid payloads
@@ -63,3 +65,5 @@ docker-compose down
 * Improve this `README.md`
   * Explain more concepts behind the project
   * Give examples on how to use the endpoints with payloads and responses
+* Explore the possibility of using GitHub actions to build the project 
+  
