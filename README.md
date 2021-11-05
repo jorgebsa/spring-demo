@@ -1,4 +1,5 @@
 ## Spring demo microservice
+[![codecov](https://codecov.io/gh/jorgebsa/spring-demo/branch/main/graph/badge.svg?token=55F3FYDVUN)](https://codecov.io/gh/jorgebsa/spring-demo)
 
 * The purpose of this project is to implement a simple CRUD microservice with Spring Boot showcasing some of the best practices available.
 * MongoDB has been chosen as the underlying database.
@@ -66,5 +67,4 @@ docker-compose down
 * Improve this `README.md`
   * Explain more concepts behind the project
   * Give examples on how to use the endpoints with payloads and responses
-* Explore the possibility of using GitHub actions to build the project 
   
