@@ -59,6 +59,7 @@ docker-compose down
 * Integrate with Spring Security 
   * Use Keycloak as the authorization server
   * Remove hardcoded `username` from controller once `Principal` is available to use
+  * Allow delete/update of a note only by its owner or an `ADMIN` 
 * Create a docker image for the project
   * Add new image and Keycloak to the project's `docker-compose.yml`
 * Improve OpenAPI documentation with annotation usage
