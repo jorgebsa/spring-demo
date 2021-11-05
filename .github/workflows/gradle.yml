@@ -24,11 +24,10 @@ jobs:
         cache: gradle
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
-    - name: Upload JaCoCo Report to Codecov
+    - name: Build and test with Gradle
+      run: ./gradlew test
+    - name: Upload JaCoCo test report to Codecov
       uses: codecov/codecov-action@v2
       with:
-        directory: ./build/reports/jacoco/test/
-        files: ./jacocoTestReport.xml
+        files: ./build/reports/jacoco/test/jacocoTestReport.xml
         verbose: true
