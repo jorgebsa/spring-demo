@@ -7,25 +7,48 @@ import com.example.kore.spring.base.SaveNoteResponse;
 import com.example.kore.spring.dao.Note;
 import com.example.kore.spring.dao.NoteRepository;
 import com.example.kore.spring.service.NoteMapper;
+import com.example.kore.spring.util.ReferenceUtil;
+import com.example.kore.spring.validation.ErrorMessage;
+import com.example.kore.spring.validation.Violation;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.jetbrains.annotations.NotNull;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
 public class NoteControllerTest extends ApplicationTests {
+
+    @Autowired
+    protected TestRestTemplate template;
+
+    @Autowired
+    protected ObjectMapper objectMapper;
 
     @Autowired
     private NoteRepository repository;
@@ -68,6 +91,26 @@ public class NoteControllerTest extends ApplicationTests {
                         .as("Response's version should be 1 as this is a new Note")
                         .isEqualTo(1L)
         );
+    }
+
+    static Stream<Arguments> saveNoteWithInvalidPayload() {
+        var violations = List.of(new Violation("content", "must not be blank"));
+        return Stream.of(
+                arguments("", violations),
+                arguments(" ", violations),
+                arguments("       ", violations)
+        );
+    }
+
+    @MethodSource
+    @ParameterizedTest
+    void saveNoteWithInvalidPayload(String content, List<Violation> violations) {
+        var headers = new LinkedMultiValueMap<String, String>();
+        headers.add("Content-Type", "application/json");
+        var httpEntity = new HttpEntity<>("{\"content\":\"" + content + "\"}", headers);
+
+        var responseEntity = template.exchange("/notes", POST, httpEntity, ErrorMessage.class);
+        assertErrorMessage(UNPROCESSABLE_ENTITY, responseEntity, Violation.asMaps(violations));
     }
 
     @Test
@@ -128,7 +171,7 @@ public class NoteControllerTest extends ApplicationTests {
 
         var responseEntity = template.exchange("/notes", GET, null, String.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(OK);
-        var resultPage = objectMapper.readValue(responseEntity.getBody(), NOTE_RESULT_PAGE_TYPE_REFERENCE);
+        var resultPage = objectMapper.readValue(responseEntity.getBody(), ReferenceUtil.NOTE_RESULT_PAGE_TYPE_REFERENCE);
         assertAll(
                 () -> assertThat(resultPage.getNumber())
                         .as("Page number should match expected value")
@@ -162,7 +205,7 @@ public class NoteControllerTest extends ApplicationTests {
 
         var responseEntity = template.exchange("/notes?page={p}&size={s}", GET, null, String.class, pageIdx, pageSize);
         assertThat(responseEntity.getStatusCode()).isEqualTo(OK);
-        var resultPage = objectMapper.readValue(responseEntity.getBody(), NOTE_RESULT_PAGE_TYPE_REFERENCE);
+        var resultPage = objectMapper.readValue(responseEntity.getBody(), ReferenceUtil.NOTE_RESULT_PAGE_TYPE_REFERENCE);
         assertAll(
                 () -> assertThat(resultPage.getNumber())
                         .as("Page number should match expected value")
@@ -183,18 +226,6 @@ public class NoteControllerTest extends ApplicationTests {
                         .as("Content should match expected value")
                         .containsExactlyElementsOf(expectedContent)
         );
-    }
-
-    @NotNull
-    private ArrayList<Note> saveNotes(int count) {
-        var savedNotes = new ArrayList<Note>(count);
-        for (int i = 0 ; i < count ; i++) {
-            var username = "user-" + (i % 3);
-            var content = "content of note #" + (i + 1);
-            savedNotes.add(new Note(username, content));
-        }
-        repository.saveAll(savedNotes);
-        return savedNotes;
     }
 
     @Test
@@ -246,5 +277,54 @@ public class NoteControllerTest extends ApplicationTests {
                         .as("body should be null")
                         .isNull()
         );
+    }
+
+    protected void assertErrorMessage(HttpStatus status, ResponseEntity<ErrorMessage> responseEntity, Object errors) {
+        var body = responseEntity.getBody();
+        assertAll(
+                () -> {
+                    assertThat(body)
+                            .as("Response body shouldn't be null")
+                            .isNotNull();
+                    assertAll(
+                            () -> assertThat(body.status())
+                                    .as("Body: 'status' should match expected value")
+                                    .isEqualTo(status.value()),
+                            () -> assertThat(body.errors())
+                                    .as("Body: 'errors' should match expected values")
+                                    .isEqualTo(errors),
+                            () -> assertTimestampIsRecent(body.timestamp())
+                    );
+                },
+                () -> assertThat(responseEntity.getStatusCode())
+                        .as("ResponseEntity: status should match expected value")
+                        .isEqualTo(status)
+        );
+    }
+
+    private void assertTimestampIsRecent(String timestamp) {
+        var currentTimeMillis = System.currentTimeMillis();
+        var zonedDateTime = ZonedDateTime.parse(timestamp, DateTimeFormatter.ISO_ZONED_DATE_TIME);
+        var timestampAsMillis = zonedDateTime.toInstant().toEpochMilli();
+
+        assertThat(timestampAsMillis).isBetween(
+                currentTimeMillis - TimeUnit.SECONDS.toMillis(4),
+                currentTimeMillis
+        );
+    }
+
+    private ArrayList<Note> saveNotes(int count) {
+        return saveNotes(count, 3);
+    }
+
+    private ArrayList<Note> saveNotes(int count, int diffUsers) {
+        var savedNotes = new ArrayList<Note>(count);
+        for (int i = 0 ; i < count ; i++) {
+            var username = "user-" + (i % diffUsers);
+            var content = "content of note #" + (i + 1);
+            savedNotes.add(new Note(username, content));
+        }
+        repository.saveAll(savedNotes);
+        return savedNotes;
     }
 }
