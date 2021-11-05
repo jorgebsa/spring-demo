@@ -53,8 +53,6 @@ docker-compose down
 * Add more MongoDB queries
   * Right now there's only findById and findPage, but there are many queries that can be added in order to filter the results, such as querying by creation date of last modified date in a range for example
 * Add more integration tests (++coverage!)
-  * Test all possible branches
-  * Include tests for failures, such as POST requests with invalid payloads
 * Add mutation testing, using Pitest
   * This is a great tool that helps implement meaningful tests, not just tests for the sake of line coverage metrics
 * Integrate with Spring Security 
