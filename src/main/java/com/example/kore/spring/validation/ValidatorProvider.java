@@ -15,4 +15,8 @@ public class ValidatorProvider {
         return VALIDATOR;
     }
 
+    private ValidatorProvider() {
+
+    }
+
 }
