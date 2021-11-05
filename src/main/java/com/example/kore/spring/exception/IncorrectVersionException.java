@@ -25,8 +25,4 @@ public class IncorrectVersionException extends RuntimeException {
         return username;
     }
 
-    @Override
-    public String getMessage() {
-        return "Can't update note [" + noteId + "] with version [" + version + "]";
-    }
 }
