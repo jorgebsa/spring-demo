@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -23,10 +24,11 @@ class NotePersistenceServiceImpl implements NotePersistenceService {
     }
 
     @Override
+    @Transactional
     public Note saveNote(String username, String content) {
         log.debug("User [{}] is trying to save note with content: {}", username, content);
         var note = new Note(username, content);
-        var saved = repository.save(note);
+        var saved = repository.insert(note);
         log.info(
                 "User [{}] created note [{}] at [{}] with version [{}]",
                 saved.getUsername(), saved.getId(), saved.getCreatedAt(), saved.getVersion()
@@ -35,6 +37,7 @@ class NotePersistenceServiceImpl implements NotePersistenceService {
     }
 
     @Override
+    @Transactional
     public Optional<Note> updateNote(String username, String content, String id, long version) {
         log.debug("User [{}] is trying to update note [{}]", username, id);
 

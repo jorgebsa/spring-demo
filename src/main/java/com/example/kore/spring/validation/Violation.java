@@ -9,9 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
+
 public record Violation(String field, String message) {
 
-    public static final Comparator<Violation> COMPARATOR = Comparator.comparing(Violation::field).thenComparing(Violation::message);
+    public static final Comparator<Violation> COMPARATOR = Comparator.comparing(Violation::field)
+            .thenComparing(Violation::message);
 
     @JsonCreator
     public Violation {
@@ -41,13 +44,10 @@ public record Violation(String field, String message) {
         return asMaps(Stream.of(violations));
     }
 
-    public static List<Map<String, String>> asMaps(Stream<Violation> violations) {
-        if (violations == null) {
-            throw new IllegalArgumentException("Violations can't be null");
-        }
+    private static List<Map<String, String>> asMaps(Stream<Violation> violations) {
         return violations.sorted(COMPARATOR)
                 .map(Violation::asMap)
-                .toList();
+                .collect(toList());
     }
 
 }
