@@ -11,7 +11,7 @@ java {
 }
 
 application {
-    mainClass.set("com.example.kore.spring.Application")
+    mainClass.set("com.github.jorgebsa.spring.demo.Application")
     applicationDefaultJvmArgs = listOf("-Dspring.profiles.active=localhost")
 }
 
