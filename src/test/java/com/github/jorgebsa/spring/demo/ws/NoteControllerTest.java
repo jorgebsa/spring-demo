@@ -1,5 +1,7 @@
 package com.github.jorgebsa.spring.demo.ws;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jorgebsa.spring.demo.ApplicationTests;
 import com.github.jorgebsa.spring.demo.base.NoteDTO;
 import com.github.jorgebsa.spring.demo.base.SaveNoteRequest;
@@ -11,8 +13,6 @@ import com.github.jorgebsa.spring.demo.service.NoteMapper;
 import com.github.jorgebsa.spring.demo.util.ReferenceUtil;
 import com.github.jorgebsa.spring.demo.validation.ErrorMessage;
 import com.github.jorgebsa.spring.demo.validation.Violation;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -181,22 +181,22 @@ public class NoteControllerTest extends ApplicationTests {
         assertThat(responseEntity.getStatusCode()).isEqualTo(OK);
         var resultPage = objectMapper.readValue(responseEntity.getBody(), ReferenceUtil.NOTE_RESULT_PAGE_TYPE_REFERENCE);
         assertAll(
-                () -> assertThat(resultPage.getNumber())
+                () -> assertThat(resultPage.number())
                         .as("Page number should match expected value")
                         .isEqualTo(0),
-                () -> assertThat(resultPage.getSize())
+                () -> assertThat(resultPage.size())
                         .as("Page size should match expected value")
                         .isEqualTo(pageSize),
-                () -> assertThat(resultPage.getTotalPages())
+                () -> assertThat(resultPage.totalPages())
                         .as("Total pages should match expected value")
                         .isEqualTo(2),
-                () -> assertThat(resultPage.getTotalElements())
+                () -> assertThat(resultPage.totalElements())
                         .as("Total elements should match expected value")
                         .isEqualTo(count),
-                () -> assertThat(resultPage.getNumberOfElements())
+                () -> assertThat(resultPage.numberOfElements())
                         .as("Number of elements should match expected value")
                         .isEqualTo(pageSize),
-                () -> assertThat(resultPage.getContent())
+                () -> assertThat(resultPage.content())
                         .as("Content should match expected value")
                         .containsExactlyElementsOf(expectedContent)
         );
@@ -215,22 +215,22 @@ public class NoteControllerTest extends ApplicationTests {
         assertThat(responseEntity.getStatusCode()).isEqualTo(OK);
         var resultPage = objectMapper.readValue(responseEntity.getBody(), ReferenceUtil.NOTE_RESULT_PAGE_TYPE_REFERENCE);
         assertAll(
-                () -> assertThat(resultPage.getNumber())
+                () -> assertThat(resultPage.number())
                         .as("Page number should match expected value")
                         .isEqualTo(pageIdx),
-                () -> assertThat(resultPage.getSize())
+                () -> assertThat(resultPage.size())
                         .as("Page size should match expected value")
                         .isEqualTo(pageSize),
-                () -> assertThat(resultPage.getTotalPages())
+                () -> assertThat(resultPage.totalPages())
                         .as("Total pages should match expected value")
                         .isEqualTo(count / pageSize),
-                () -> assertThat(resultPage.getTotalElements())
+                () -> assertThat(resultPage.totalElements())
                         .as("Total elements should match expected value")
                         .isEqualTo(count),
-                () -> assertThat(resultPage.getNumberOfElements())
+                () -> assertThat(resultPage.numberOfElements())
                         .as("Number of elements should match expected value")
                         .isEqualTo(pageSize),
-                () -> assertThat(resultPage.getContent())
+                () -> assertThat(resultPage.content())
                         .as("Content should match expected value")
                         .containsExactlyElementsOf(expectedContent)
         );
