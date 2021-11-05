@@ -1,29 +1,16 @@
 package com.example.kore.spring.validation;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.validation.FieldError;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
-
 public record Violation(String field, String message) {
 
     public static final Comparator<Violation> COMPARATOR = Comparator.comparing(Violation::field)
             .thenComparing(Violation::message);
-
-    @JsonCreator
-    public Violation {
-
-    }
-
-    public Violation(FieldError fieldError) {
-        this(fieldError.getField(), fieldError.getDefaultMessage());
-    }
 
     @JsonIgnore
     public Map<String, String> asMap() {

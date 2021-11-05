@@ -13,7 +13,6 @@ import com.example.kore.spring.validation.ErrorMessage;
 import com.example.kore.spring.validation.Violation;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,12 +40,12 @@ import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CONFLICT;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
 public class NoteControllerTest extends ApplicationTests {
 
@@ -112,7 +111,7 @@ public class NoteControllerTest extends ApplicationTests {
         var httpEntity = new HttpEntity<>("{\"content\":\"" + content + "\"}", headers);
 
         var responseEntity = template.exchange("/notes", POST, httpEntity, ErrorMessage.class);
-        assertErrorMessage(UNPROCESSABLE_ENTITY, responseEntity, Violation.asMaps(violation));
+        assertErrorMessage(BAD_REQUEST, responseEntity, Violation.asMaps(violation));
     }
 
     @Test
@@ -162,6 +161,13 @@ public class NoteControllerTest extends ApplicationTests {
                         .as("body should be null")
                         .isNull()
         );
+    }
+
+    @Test
+    void findByIdWhenInvalid() {
+        var expectedViolation = Violation.asMaps(new Violation("id", "must not be blank"));
+        var responseEntity = template.exchange("/notes/{id}", GET, null, ErrorMessage.class, "    ");
+        assertErrorMessage(BAD_REQUEST, responseEntity, expectedViolation);
     }
 
     @Test
@@ -339,7 +345,7 @@ public class NoteControllerTest extends ApplicationTests {
         var httpEntity = new HttpEntity<>("{\"content\":\"" + content + "\",\"version\":" + version + "}", headers);
 
         var responseEntity = template.exchange("/notes/{id}", PUT, httpEntity, ErrorMessage.class, saved.getId());
-        assertErrorMessage(UNPROCESSABLE_ENTITY, responseEntity, Violation.asMaps(violations));
+        assertErrorMessage(BAD_REQUEST, responseEntity, Violation.asMaps(violations));
     }
 
     @Test
@@ -413,6 +419,7 @@ public class NoteControllerTest extends ApplicationTests {
         headers.add("Content-Type", "application/json");
         return headers;
     }
+
     private void assertTimestampIsRecent(String timestamp) {
         var zonedDateTime = ZonedDateTime.parse(timestamp, DateTimeFormatter.ISO_ZONED_DATE_TIME);
         var timestampAsMillis = zonedDateTime.toInstant().toEpochMilli();

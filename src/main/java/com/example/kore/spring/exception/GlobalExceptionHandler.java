@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CONFLICT;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
@@ -22,23 +23,9 @@ class GlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    ResponseEntity<ErrorMessage> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
-        var status = UNPROCESSABLE_ENTITY;
-        log.info("Handling MethodArgumentNotValidException [{}]", status);
-        var violations = ex.getBindingResult()
-                .getFieldErrors()
-                .stream()
-                .map(Violation::new)
-                .sorted(Violation.COMPARATOR)
-                .toList();
-        log.debug("Violations: {}", violations);
-        return buildResponse(status, violations);
-    }
-
     @ExceptionHandler(ConstraintViolationException.class)
     ResponseEntity<ErrorMessage> handleConstraintValidationException(ConstraintViolationException ex) {
-        var status = UNPROCESSABLE_ENTITY;
+        var status = BAD_REQUEST;
         log.info("Handling ConstraintViolationException [{}]", status);
         var violations = ex.getConstraintViolations()
                 .stream()
