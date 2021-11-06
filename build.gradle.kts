@@ -2,6 +2,7 @@ plugins {
     `java-library`
     jacoco
     application
+    id("org.barfuin.gradle.jacocolog") version "2.0.0"
 }
 
 java {
