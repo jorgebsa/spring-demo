@@ -3,6 +3,7 @@ plugins {
     jacoco
     application
     id("org.barfuin.gradle.jacocolog") version "2.0.0"
+    id("info.solidsoft.pitest") version "1.7.0"
 }
 
 java {
@@ -63,4 +64,9 @@ tasks.jacocoTestCoverageVerification {
             }
         }
     }
+}
+
+pitest {
+    junit5PluginVersion.set("0.15")
+    timestampedReports.set(false)
 }
