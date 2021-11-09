@@ -7,7 +7,7 @@
 [![Java version](https://img.shields.io/badge/Java%20version-17-brightgreen?style=for-the-badge)](https://openjdk.java.net/projects/jdk/17/)
 [![Spring Boot version](https://img.shields.io/badge/Spring%20Boot%20version-2.5.6-brightgreen?style=for-the-badge)](https://docs.spring.io/spring-boot/docs/2.5.6/reference/html/getting-started.html#getting-started)
 [![Gradle wrapper version](https://img.shields.io/badge/Gradle%20version-7.2-brightgreen?style=for-the-badge)](https://docs.gradle.org/7.2/release-notes.html)
-[![MongoDB container version](https://img.shields.io/badge/MongoDB%20version-4.0.10-brightgreen?style=for-the-badge)](https://docs.mongodb.com/manual/release-notes/4.0-changelog/#std-label-4.0.10-changelog)
+[![MongoDB container version](https://img.shields.io/badge/MongoDB%20version-5.0.3-brightgreen?style=for-the-badge)](https://docs.mongodb.com/manual/release-notes/5.0-changelog/#std-label-5.0.3-changelog)
 
 ## Introduction
 
