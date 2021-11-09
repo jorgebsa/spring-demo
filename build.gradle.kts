@@ -1,7 +1,7 @@
 plugins {
     `java-library`
     jacoco
-    application
+    id("org.springframework.boot") version "2.5.6"
     id("org.barfuin.gradle.jacocolog") version "2.0.0"
     id("info.solidsoft.pitest") version "1.7.0"
 }
@@ -12,9 +12,8 @@ java {
     }
 }
 
-application {
+springBoot {
     mainClass.set("com.github.jorgebsa.spring.demo.Application")
-    applicationDefaultJvmArgs = listOf("-Dspring.profiles.active=localhost")
 }
 
 repositories {
@@ -23,11 +22,10 @@ repositories {
 }
 
 dependencies {
-    val springBootVersion: String by project
     val testcontainersVersion: String by project
     val springdocOpenAPIVersion: String by project
 
-    implementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
+    implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
