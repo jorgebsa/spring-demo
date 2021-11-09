@@ -27,10 +27,9 @@ If you need further help, check its [documentation](https://docs.gradle.org/curr
 ./gradlew help
 ```
 
-
 ### About the API
 
-The API is rather simple, this microservice allows users to save notes, and offers endpoints for the basic [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations.
+The API is rather simple, this microservice allows users to keep track of their "notes", and offers endpoints for the basic [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations.
 
 ## How to Build
 
@@ -63,18 +62,18 @@ Don't worry! If a matching JDK is not found on your machine, gradle will automat
 
 Testing is crucial to ensure code is reliable, maintainable, reusable, extensible. All of these factors influence the code's quality standard.
 
-Many libraries can be used to improve the testing experience. In this project, we are going to be using some great libraries and tools such as:
+Many libraries can be used to improve the testing experience. In this project some great libraries and tools are showcased, such as:
 
-* [JUnit 5](https://junit.org/junit5/) in order to create and run our tests
-* [AssertJ](https://joel-costigliola.github.io/assertj/) in order to write amazing assertions on our test cases
-* [Testcontainers](https://www.testcontainers.org/) in order to reproduce a real world environment for our tests
-* [JaCoCo](https://www.jacoco.org/jacoco/trunk/index.html) in order to generate the coverage report of our project
-* [Pitest](https://pitest.org/) in order to execute mutation testing
-* [Codecov](https://about.codecov.io/) in order to keep track of our repository's coverage
+* [JUnit 5](https://junit.org/junit5/) to create and run our tests
+* [AssertJ](https://joel-costigliola.github.io/assertj/) to write amazing assertions in our test cases
+* [Testcontainers](https://www.testcontainers.org/) to reproduce a real environment for our tests
+* [JaCoCo](https://www.jacoco.org/jacoco/trunk/index.html) to generate the coverage report of our project
+* [Pitest](https://pitest.org/) to execute mutation testing
+* [Codecov](https://about.codecov.io/) to keep track of our repository's coverage
 
 Integration and Unit tests can be found in the `src/test` directory. 
 Usually, they could've been split into different source sets, such as `src/test` for unit tests and `src/it` for integration tests, 
-but that was not deemed necessary for this project's purpose, given its size and complexity.
+but that was not deemed necessary for this project's purpose, given its size and complexity. This might change in the future.
 
 In order to run the tests in this project, run this command:
 
@@ -88,8 +87,8 @@ JUnit is the most used testing library for Java, 5 being its most recent major v
 It has many features and advantages over JUnit 4, some of which will be used in our tests, such as:
 
 * `@ParameterizedTest`: this allows us to execute the same test case any number of times with varying inputs
-* `Assertions.assertAll(...)`: in order to validate all assertions in a block without failing the test once the first assertion fails
-* `Assertions.assertThrows(...)`: which helps to assert exceptions and its properties 
+* `Assertions.assertAll(...)`: in order to execute all assertions in a block without failing the test once the first assertion fails
+* `Assertions.assertThrows(...)`: which helps asserting exceptions and their properties 
 
 ### Why use AssertJ instead of another assertion library?
 
@@ -97,7 +96,7 @@ The purpose of this project is not to compare assertion libraries, such as Asser
 
 AssertJ is an amazing library, and is already included when we import Spring Boot's testing dependency, so that's why it was used in this project. 
 
-What matters here is that we write meaningful and helpful assertions, and AssertJ does a great job at it.
+Writing meaningful and helpful assertions with ease is the goal, and AssertJ does a great job at it.
 
 ### Why use Testcontainers instead of an embedded database?
 
@@ -106,22 +105,24 @@ We want our API to be reliable, extensible, maintainable, reusable, and that ass
 One way to ensure that we don't break anything when developing new features or fixing bugs is to have a very thorough test suite,
 and having a continuous integration pipeline that automatically runs those tests and lets us know when things go wrong.
 
-However, what if our tests do not reproduce the real environment? The execution of the test suite can be successful and once we deploy the new version
-to our real world production environment, things that we assumed were fine still run the risk of breaking because the environment was nothing like we tested.
+However, what if our tests do not reproduce the real environment? The execution of the test suite can be successful and once we deploy 
+the new version to our real world production environment, things that we assumed were fine still run the risk of breaking because the 
+environment it was deployed to was nothing like we tested.
 
 One of the ways to reduce this kind of problem is to use a real database with the same version as the one in our production environment. 
 
-This is where Testcontainers comes in handy, allowing us to spin up disposable Docker containers that will live only during the execution of our test suite. 
+This is where Testcontainers comes in handy, allowing us to spin up disposable Docker containers that will live only during the execution 
+of our test suite. 
 
 In this case, the existing `org.testcontainers:mongodb` dependency was used to import its `MongoDBContainer` class which was extended by 
-`ExtendedMongoDBContainer` class in order to ensure that the appropriate `URL` connection value was made available to Spring Data once the container
-was ready to accept connections.
+`ExtendedMongoDBContainer` class in order to ensure that the appropriate `URL` connection value was made available to Spring Data once 
+the container was ready to accept connections.
 
 #### Important:
 
 * Using `testcontainers` means that most of our tests REQUIRE docker to be available in the host machine in order to be run at all.
-* The MongoDB Docker image being used is `mongo:4.0.10`. If it is not found in the host machine, `testcontainers` will automatically download it
-  * If you want to download it manually you can by running `docker pull mongo:4.0.10`
+* The MongoDB Docker image being used is `mongo:5.0.3`. If it is not found in the host machine, `testcontainers` will automatically download it
+  * If you want to download it manually you can by running `docker pull mongo:5.0.3`
 
 ### What is JaCoCo?
 
@@ -130,12 +131,12 @@ JaCoCo is an amazing tool that generates code coverage reports for java. In orde
 
 The plugin provides two useful tasks: 
 
-* `jacocoTestReport`:  Generates the report, depends on the output of tests. In this project, the gradlew `test` task is finalized by this task, 
+* `jacocoTestReport`:  Generates the report and depends on the output of tests. In this project, the gradlew `test` task is finalized by this task, 
 so that the coverage report is always generated after test execution
 * `jacocoTestCoverageVerification`: verifies if the coverage rules are met. If a project declares min 99% coverage, 
-the task will fail if the coverage is below that threshold 
+the task will fail if the coverage is below that threshold
 
-In this project, we are generating both HTML and XML reports. 
+In this project, the plugin is configured to generate both HTML and XML reports. 
  * HTML provides the best visual experience, as it allows a developer to navigate through the packages and classes, checking all the coverage details.
  * The XML report is created so that is exported to [Codecov](https://codecov.io/) when the GitHub Actions workflow is executed
 
@@ -177,22 +178,70 @@ It provides the `pitest` gradle task, which runs the mutated tests, and the gene
 
 #### Important:
 * Given many mutations are generated for each test case, the execution time of the `pitest` task is much bigger than the time from the `test` task 
+* When executing the `pitest` task, an extra JVM will be launched, matching the JDK from Gradle. Since we are using the `toolchain` approach when 
+building the project, this extra JVM might not use a JDK with version 17, which will cause the task to fail. In order to avoid this, make sure you 
+set the Gradle JDK to be at version 17+. 
+  * One simple way to do this is to use a tool like [SDKMAN](https://sdkman.io/), which manages JDK (and other SDKs) on your machine
 
 ## Running the microservice
 
-Since the microservice depends on a MongoDB instance to be available, a `docker-compose.yml` that spins up a MongoDB container has been added to the project
-  * If you have Mongo installed or available on a given URL, you can use that instead, just don't forget to update `src/main/resources/application.yml` with the appropriate connection values
+There are a few ways to launch the application: 
+* You can run it directly from your IDE, by invoking the main method of `com.github.jorgebsa.spring.demo.Application`
+* You can run it using the [Spring Boot Gradle plugin](https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#running-your-application)
+* You can run it as a Docker container
+
+### MongoDB
+
+Remember that this microservice depends on a MongoDB instance to be available for connection. If you have Mongo installed or available
+on a remote server, you can use such instance, just don't forget to update `src/main/resources/application.yml` or another profile's properties 
+with the appropriate connection URI.
+
+However, you can also easily spin up a MongoDB docker container. A file called `mongo-docker-compose.yml` has been added to the project, 
+and you can use [Docker Compose](https://docs.docker.com/compose/) in order to take advantage of it.
+
+To start the container, execute:
+
+```shell
+docker-compose -f mongo-docker-compose.yml up -d
+```
+
+To stop it, execute:
+
+```shell
+docker-compose -f mongo-docker-compose.yml down
+```
+
+### Running the application with Gradle
+
+Once your MongoDB is running, you can start the application with a simple Gradle [task](https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#running-your-application)) from the Spring Boot Plugin
 
 In order to run the database and the service, execute: 
 
 ```shell
-docker-compose up -d
-./gradlew run
+./gradlew bootRun
 ```
 
-* Swagger UI is available at `http://localhost:8080/swagger-ui.html`
+After the application starts, you can access the Swagger UI available at `http://localhost:8080/swagger-ui.html`
   
-If tou wish to stop the database, execute:
+### Running the application with Docker
+
+In order to do this, you need to build the project's Docker image. To do so, take advantage of the `bootBuildImage` [task](https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#build-image) from the Spring Boot Gradle Plugin:
+
+```shell
+./gradlew bootBuildImage
+```
+
+This will generate an image called `docker.io/library/spring-demo:0.0.1-SNAPSHOT`. You can execute it with the traditional `docker run` command of take advantage
+of the `docker-compose.yml` that is already configured to launch the container along the MongoDB container. 
+
+To do so, execute:
+
+```shell
+docker-compose up -d
+```
+
+To stop both the application and the database, execute:
+
 ```shell
 docker-compose down
 ```
@@ -205,9 +254,5 @@ docker-compose down
   * Use Keycloak as the authorization server
   * Remove hardcoded `username` from controller once `Principal` is available to use
   * Allow delete/update of a note only by its owner or an `ADMIN` 
-* Create a docker image for the project
-  * Add new image and Keycloak to the project's `docker-compose.yml`
+  * Add Keycloak to the project's `docker-compose.yml`
 * Improve OpenAPI documentation with annotation usage
-* Improve this `README.md`
-  * Give examples on how to use the endpoints with payloads and responses
-  
