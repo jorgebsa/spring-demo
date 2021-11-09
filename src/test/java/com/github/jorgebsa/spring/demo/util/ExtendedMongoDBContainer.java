@@ -3,7 +3,7 @@ package com.github.jorgebsa.spring.demo.util;
 import org.testcontainers.containers.MongoDBContainer;
 
 public class ExtendedMongoDBContainer extends MongoDBContainer {
-    public static final String DEFAULT_DOCKER_IMAGE = "mongo:4.0.10";
+    public static final String DEFAULT_DOCKER_IMAGE = "mongo:5.0.3";
 
     private static ExtendedMongoDBContainer instance;
 
