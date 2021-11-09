@@ -1,18 +1,13 @@
 ## Spring demo microservice
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jorgebsa/spring-demo/Java%20CI%20with%20Gradle?style=for-the-badge)](https://github.com/jorgebsa/spring-demo/actions/workflows/gradle.yml) 
-![GitHub branch checks state](https://img.shields.io/github/checks-status/jorgebsa/spring-demo/main?style=for-the-badge) 
 [![Codecov](https://img.shields.io/codecov/c/github/jorgebsa/spring-demo?style=for-the-badge&token=55F3FYDVUN)](https://codecov.io/gh/jorgebsa/spring-demo) 
 [![GitHub last commit](https://img.shields.io/github/last-commit/jorgebsa/spring-demo?style=for-the-badge)](https://github.com/jorgebsa/spring-demo/commits/main) 
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/jorgebsa/spring-demo?style=for-the-badge)](https://github.com/jorgebsa/spring-demo/commits/main)
 
-[![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)](https://inside.java)
-[![Java version](https://img.shields.io/badge/version-17-brightgreen?style=for-the-badge)](https://openjdk.java.net/projects/jdk/17/)
-[![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)](https://spring.io/projects/spring-boot)
-[![Spring Boot version](https://img.shields.io/badge/Boot%20version-2.5.6-brightgreen?style=for-the-badge)](https://docs.spring.io/spring-boot/docs/2.5.6/reference/html/getting-started.html#getting-started)
-[![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)](https://gradle.org/)
-[![Gradle wrapper version](https://img.shields.io/badge/Wrapper%20version-7.2-brightgreen?style=for-the-badge)](https://docs.gradle.org/7.2/release-notes.html)
-[![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![MongoDB container version](https://img.shields.io/badge/Container%20version-4.0.10-brightgreen?style=for-the-badge)](https://docs.mongodb.com/manual/release-notes/4.0-changelog/#std-label-4.0.10-changelog)
+[![Java version](https://img.shields.io/badge/Java%20version-17-brightgreen?style=for-the-badge)](https://openjdk.java.net/projects/jdk/17/)
+[![Spring Boot version](https://img.shields.io/badge/Spring%20Boot%20version-2.5.6-brightgreen?style=for-the-badge)](https://docs.spring.io/spring-boot/docs/2.5.6/reference/html/getting-started.html#getting-started)
+[![Gradle wrapper version](https://img.shields.io/badge/Gradle%20version-7.2-brightgreen?style=for-the-badge)](https://docs.gradle.org/7.2/release-notes.html)
+[![MongoDB container version](https://img.shields.io/badge/MongoDB%20version-4.0.10-brightgreen?style=for-the-badge)](https://docs.mongodb.com/manual/release-notes/4.0-changelog/#std-label-4.0.10-changelog)
 
 ## Introduction
 
