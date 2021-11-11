@@ -31,6 +31,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("com.fasterxml.jackson.module:jackson-module-parameter-names")
     implementation("org.springdoc:springdoc-openapi-ui:$springdocOpenAPIVersion")
+    implementation("org.springdoc:springdoc-openapi-data-rest:$springdocOpenAPIVersion")
 
     testImplementation(platform("org.testcontainers:testcontainers-bom:$testcontainersVersion"))
     testImplementation("org.testcontainers:junit-jupiter")
