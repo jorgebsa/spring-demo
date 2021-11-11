@@ -279,4 +279,3 @@ filter the results, such as querying by creation date of last modified date in a
   * Remove hardcoded `username` from controller once `Principal` is available to use
   * Allow delete/update of a note only by its owner or an `ADMIN` 
   * Add Keycloak to the project's `docker-compose.yml`
-* Improve OpenAPI documentation with annotation usage
