@@ -3,7 +3,7 @@ package com.github.jorgebsa.spring.demo.util;
 import org.testcontainers.containers.MongoDBContainer;
 
 public class ExtendedMongoDBContainer extends MongoDBContainer {
-    public static final String DEFAULT_DOCKER_IMAGE = "mongo:5.0.3";
+    public static final String DEFAULT_DOCKER_IMAGE = "mongo:5.0.4";
 
     private static ExtendedMongoDBContainer instance;
     private static final Object MUTEX = new Object();
