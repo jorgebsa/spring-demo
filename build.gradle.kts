@@ -85,6 +85,5 @@ sonarqube {
         property("sonar.projectKey", "jorgebsa_spring-demo")
         property("sonar.organization", "jorgebsa")
         property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
