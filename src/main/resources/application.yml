@@ -1,10 +1,21 @@
 server:
   port: 8080
+  error:
+    include-message: always
+    include-exception: true
 
 spring:
   data:
     mongodb:
-      uri: mongodb://root:example@localhost:27017/demo
+      uri: mongodb://root:example@localhost:27017/spring-demo
+
+keycloak:
+  auth-server-url: http://localhost:8081/auth
+  realm: tests
+  resource: spring-demo
+  ssl-required: external
+  principal-attribute: preferred_username
+  use-resource-role-mappings: true
 
 logging:
   level:

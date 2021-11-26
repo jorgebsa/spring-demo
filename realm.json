@@ -1,0 +1,49 @@
+{
+  "realm": "tests",
+  "enabled": true,
+  "accessTokenLifespan": 36000,
+  "registrationAllowed": true,
+  "clients": [
+    {
+      "clientId": "spring-demo",
+      "secret": "the-secret",
+      "directAccessGrantsEnabled": true,
+      "redirectUris": [
+        "http://localhost:8080/*"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "the-admin",
+      "enabled": true,
+      "clientRoles": {
+        "spring-demo": [
+          "notes-admin",
+          "notes-user"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "123Admin"
+        }
+      ]
+    },
+    {
+      "enabled": true,
+      "username": "some-user",
+      "clientRoles": {
+        "spring-demo": [
+          "notes-user"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ]
+    }
+  ]
+}
