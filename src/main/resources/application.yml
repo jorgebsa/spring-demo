@@ -5,6 +5,8 @@ server:
     include-exception: true
 
 spring:
+  main:
+    allow-circular-references: true #Current Keycloak adapter version has circular reference
   data:
     mongodb:
       uri: mongodb://root:example@localhost:27017/spring-demo
