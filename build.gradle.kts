@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "2.6.0"
     id("org.barfuin.gradle.jacocolog") version "2.0.0"
     id("info.solidsoft.pitest") version "1.7.0"
+    id("org.sonarqube") version "3.3"
 }
 
 java {
@@ -77,4 +78,12 @@ tasks.jacocoTestCoverageVerification {
 pitest {
     junit5PluginVersion.set("0.15")
     timestampedReports.set(false)
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "jorgebsa_spring-demo")
+        property("sonar.organization", "jorgebsa")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
 }
