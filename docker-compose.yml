@@ -1,6 +1,22 @@
-version: '3'
+version: '3.8'
 
 services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:15.0.2
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: Pa55w0rd
+    command:
+      - "-b 0.0.0.0"
+      - "-Dkeycloak.import=/opt/jboss/keycloak/realm.json"
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./realm.json:/opt/jboss/keycloak/realm.json
+    healthcheck:
+      test: "curl -f http://localhost:8080/auth || exit 1"
+      start_period: 30s
+
   mongodb:
     image: mongo:5.0.3
     ports:
@@ -8,11 +24,5 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-  application:
-    image: docker.io/library/spring-demo:0.0.1-SNAPSHOT
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_PROFILES_ACTIVE: compose
-    depends_on:
-      - mongodb
+    healthcheck:
+      test: "echo 'db.stats().ok' | mongo localhost:27017/spring-demo --quiet"
