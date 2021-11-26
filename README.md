@@ -7,7 +7,7 @@
 [![Java version](https://img.shields.io/badge/Java%20version-17-brightgreen?style=for-the-badge)](https://openjdk.java.net/projects/jdk/17/)
 [![Spring Boot version](https://img.shields.io/badge/Spring%20Boot%20version-2.6.0-brightgreen?style=for-the-badge)](https://docs.spring.io/spring-boot/docs/2.6.0/reference/html/getting-started.html#getting-started)
 [![Gradle wrapper version](https://img.shields.io/badge/Gradle%20version-7.3-brightgreen?style=for-the-badge)](https://docs.gradle.org/7.3/release-notes.html)
-[![MongoDB container version](https://img.shields.io/badge/MongoDB%20version-5.0.3-brightgreen?style=for-the-badge)](https://docs.mongodb.com/manual/release-notes/5.0-changelog/#std-label-5.0.3-changelog)
+[![MongoDB container version](https://img.shields.io/badge/MongoDB%20version-5.0.4-brightgreen?style=for-the-badge)](https://docs.mongodb.com/manual/release-notes/5.0-changelog/#std-label-5.0.4-changelog)
 
 ## Introduction
 
@@ -270,7 +270,7 @@ in the host machine in order to run at all.
 
 The Docker images being used in the tests are:
 
-* `mongo:5.0.3`
+* `mongo:5.0.4`
 * `quay.io/keycloak/keycloak:15.0.2`
 
 If they are not found in the host machine, `testcontainers` will automatically download 
@@ -279,7 +279,7 @@ so if you wish to manually download the images before executing the tests, you c
 executing the `pull` command:
 
 ```shell
-docker pull mongo:5.0.3
+docker pull mongo:5.0.4
 docker pull quay.io/keycloak/keycloak:15.0.2
 ```
 
