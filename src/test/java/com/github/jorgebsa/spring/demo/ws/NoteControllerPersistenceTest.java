@@ -9,7 +9,6 @@ import com.github.jorgebsa.spring.demo.util.NoteFactory;
 import com.github.jorgebsa.spring.demo.util.UserData;
 import com.github.jorgebsa.spring.demo.validation.ErrorMessage;
 import com.github.jorgebsa.spring.demo.validation.Violation;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

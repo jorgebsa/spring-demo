@@ -2,7 +2,6 @@ package com.github.jorgebsa.spring.demo.validation;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import javax.validation.Validator;
 import java.lang.reflect.Constructor;
 import java.util.Set;
 import java.util.stream.Collectors;
