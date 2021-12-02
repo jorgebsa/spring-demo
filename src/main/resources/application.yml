@@ -7,7 +7,7 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://root:example@localhost:27017/spring-demo
+      uri: mongodb://root:example@localhost:27017/spring-demo?authSource=admin
 
 keycloak:
   auth-server-url: http://localhost:8081/auth
