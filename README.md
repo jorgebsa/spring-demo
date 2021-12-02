@@ -29,7 +29,7 @@
 6. [Required services](#required-services)
    1. [Docker Compose](#docker-compose)
    2. [Keycloak](#keycloak)
-7. [Running the microservice](#Running the microservice)
+7. [Running the microservice](#running-the-microservice)
    1. [Running the application with Gradle](#running-the-application-with-gradle)
    2. [Consuming the API](#consuming-the-api)
 8. [Contributing](#contributing)
