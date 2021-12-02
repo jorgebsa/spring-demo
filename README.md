@@ -9,6 +9,31 @@
 [![Gradle wrapper version](https://img.shields.io/badge/Gradle%20version-7.3.1-brightgreen?style=for-the-badge)](https://docs.gradle.org/7.3.1/release-notes.html)
 [![MongoDB container version](https://img.shields.io/badge/MongoDB%20version-5.0.4-brightgreen?style=for-the-badge)](https://docs.mongodb.com/manual/release-notes/5.0-changelog/#std-label-5.0.4-changelog)
 
+## Table of contents
+
+1. [Introduction](#Introduction)
+2. [About the API](#About the API)
+3. [Language Version](#Language Version)
+   1. [JDK 17](#JDK 17)
+   2. [Managing JDKs with SDKMAN!](#Managing JDKs with SDKMAN!)
+   3. [Available Toolchains](#Available Toolchains)
+4. [How to Build](#How to Build)
+5. [Testing](#Testing)
+   1. [Why JUnit 5?](#Why JUnit 5?)
+   2. [Why AssertJ?](#Why AssertJ?)
+   3. [Why Testcontainers?](#Why Testcontainers?)
+   4. [What is JaCoCo?](#What is JaCoCo?)
+      1. [JaCoCo logging](#JaCoCo logging)
+   5. [Mutation Testing](#Mutation Testing)
+   6. [Future-proofing](#future-proofing)
+6. [Required services](#Required services)
+   1. [Docker Compose](#Docker Compose)
+   2. [Keycloak](#Keycloak)
+7. [Running the microservice](#Running the microservice)
+   1. [Running the application with Gradle](#Running the application with Gradle)
+   2. [Consuming the API](#Consuming the API)
+8. [Contributing](#Contributing)
+
 ## Introduction
 
 This project is about showcasing some of the best practices and technologies that can be 
