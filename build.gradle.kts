@@ -71,16 +71,27 @@ tasks.jacocoTestReport {
     reports {
         xml.required.set(true)
     }
+
+    classDirectories.setFrom(
+            sourceSets.main.get().output.asFileTree.matching {
+                exclude("com/github/jorgebsa/spring/demo/Application.class")
+            }
+    )
 }
 
 tasks.jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = "0.99".toBigDecimal()
+                minimum = "1.0".toBigDecimal()
             }
         }
     }
+    classDirectories.setFrom(
+            sourceSets.main.get().output.asFileTree.matching {
+                exclude("com/github/jorgebsa/spring/demo/Application.class")
+            }
+    )
 }
 
 pitest {
