@@ -202,8 +202,10 @@ In order to run the tests in this project, execute the `test` task:
 ./gradlew test
 ```
 
-When execution ends, relevant reports will be generated and available at 
-`build/reports`
+When execution ends, reports will be available at:
+
+* `build/reports/tests/test` for JUnit reports
+* `build/reports/jacoco/test` for JaCoCo reports
 
 ### Why JUnit 5?
 
@@ -360,6 +362,51 @@ language version declared by the toolchain, the execution of `pitest` task will
 fail. In order to avoid this, make sure you set the JDK used by Gradle to be
 compatible with the toolchain version. If you are using SDKMAN! this can be easily
 done by executing the `sdk use java` command before you invoke the `pitest` task.
+
+### Future-proofing
+
+One way to future-proof your application is to test it against early access builds of
+future JDKs. This can save you a lot of time when migrating to newer versions of the
+JDK, as it will make it clear if your current code and dependencies are compatible
+with the next release.
+
+Since this project is written in Java 17, the only early access builds it can be tested
+against are from JDK 18 (at the time of writing this). Therefore, a Gradle task called 
+`testsOn18` has been created and declared in the [build.gradle.kts](build.gradle.kts) 
+file. This task sets the Java Toolchain to use Java Language Version 18 and executes the
+project's tests.
+
+To run the tests on JDK 18, execute the following command:
+
+````shell
+./gradlew testsOn18
+````
+
+Once the tests finish, you can access the reports at `build/reports/tests/testsOn18`
+
+Please note that since an early access build of the JDK is required to test against a
+future version of the JDK, you must install it manually, as Gradle's toolchain isn't 
+capable of downloading one. This might change in the future, as Gradle has an open 
+[issue](https://github.com/gradle/gradle/issues/14814) for this feature. 
+
+If you are using SDKMAN! as suggested in the previous sections, you can easily
+download an early access build of the JDK. At the time of writing, the latest build
+was `18.ea.25` which can be installed by executing:
+
+```shell
+sdk install java 18.ea.25-open
+```
+
+Once installed, Gradle's Toolchain is capable of automatically locating the early
+access build of the JDK and use it when required.
+
+#### IMPORTANT
+
+The current version of JaCoCo is `0.8.7` and it isn't compatible with Java 18, 
+therefore an exception will be thrown when running the tests on 18. However, this 
+doesn't mean that the tests have failed or won't be executed, just that JaCoCo won't
+be able to generate its reports from the test output. This should be fixed when 
+JaCoCo version `0.8.8` is released.
 
 ## Required services
 

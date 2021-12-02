@@ -53,8 +53,17 @@ tasks.withType<JavaCompile> {
     options.compilerArgs.add("-parameters")
 }
 
-tasks.test {
+tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.register<Test>("testsOn18") {
+    javaLauncher.set(javaToolchains.launcherFor {
+        languageVersion.set(JavaLanguageVersion.of(18))
+    })
+}
+
+tasks.test {
     finalizedBy(tasks.jacocoTestReport)
 }
 
