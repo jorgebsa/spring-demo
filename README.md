@@ -5,7 +5,7 @@
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/jorgebsa/spring-demo?style=for-the-badge)](https://github.com/jorgebsa/spring-demo/commits/main)
 
 [![Java version](https://img.shields.io/badge/Java%20version-17-brightgreen?style=for-the-badge)](https://openjdk.java.net/projects/jdk/17/)
-[![Spring Boot version](https://img.shields.io/badge/Spring%20Boot%20version-2.6.0-brightgreen?style=for-the-badge)](https://docs.spring.io/spring-boot/docs/2.6.0/reference/html/getting-started.html#getting-started)
+[![Spring Boot version](https://img.shields.io/badge/Spring%20Boot%20version-2.6.1-brightgreen?style=for-the-badge)](https://docs.spring.io/spring-boot/docs/2.6.1/reference/html/getting-started.html#getting-started)
 [![Gradle wrapper version](https://img.shields.io/badge/Gradle%20version-7.3.1-brightgreen?style=for-the-badge)](https://docs.gradle.org/7.3.1/release-notes.html)
 [![MongoDB container version](https://img.shields.io/badge/MongoDB%20version-5.0.4-brightgreen?style=for-the-badge)](https://docs.mongodb.com/manual/release-notes/5.0-changelog/#std-label-5.0.4-changelog)
 
@@ -521,11 +521,11 @@ to launch the application:
 
 * You can run it directly from your IDE, by invoking the main method of
 `com.github.jorgebsa.spring.demo.Application`
-* You can run it using the [Spring Boot Gradle plugin](https://docs.spring.io/spring-boot/docs/2.6.0/gradle-plugin/reference/htmlsingle/#running-your-application)
+* You can run it using the [Spring Boot Gradle plugin](https://docs.spring.io/spring-boot/docs/2.6.1/gradle-plugin/reference/htmlsingle/#running-your-application)
 
 ### Running the application with Gradle
  
-Is as easy as invoking a simple [task](https://docs.spring.io/spring-boot/docs/2.6.0/gradle-plugin/reference/htmlsingle/#running-your-application)
+Is as easy as invoking a simple [task](https://docs.spring.io/spring-boot/docs/2.6.1/gradle-plugin/reference/htmlsingle/#running-your-application)
 from the Spring Boot Gradle Plugin:
 
 ```shell
