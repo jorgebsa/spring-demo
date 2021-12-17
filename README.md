@@ -2,11 +2,10 @@
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jorgebsa/spring-demo/Java%20CI%20with%20Gradle?style=for-the-badge)](https://github.com/jorgebsa/spring-demo/actions/workflows/gradle.yml) 
 [![Codecov](https://img.shields.io/codecov/c/github/jorgebsa/spring-demo?style=for-the-badge&token=55F3FYDVUN)](https://codecov.io/gh/jorgebsa/spring-demo) 
 [![GitHub last commit](https://img.shields.io/github/last-commit/jorgebsa/spring-demo?style=for-the-badge)](https://github.com/jorgebsa/spring-demo/commits/main) 
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/jorgebsa/spring-demo?style=for-the-badge)](https://github.com/jorgebsa/spring-demo/commits/main)
 
 [![Java version](https://img.shields.io/badge/Java%20version-17-brightgreen?style=for-the-badge)](https://openjdk.java.net/projects/jdk/17/)
 [![Spring Boot version](https://img.shields.io/badge/Spring%20Boot%20version-2.6.1-brightgreen?style=for-the-badge)](https://docs.spring.io/spring-boot/docs/2.6.1/reference/html/getting-started.html#getting-started)
-[![Gradle wrapper version](https://img.shields.io/badge/Gradle%20version-7.3.1-brightgreen?style=for-the-badge)](https://docs.gradle.org/7.3.1/release-notes.html)
+[![Gradle wrapper version](https://img.shields.io/badge/Gradle%20version-7.3.2-brightgreen?style=for-the-badge)](https://docs.gradle.org/7.3.2/release-notes.html)
 [![MongoDB container version](https://img.shields.io/badge/MongoDB%20version-5.0.4-brightgreen?style=for-the-badge)](https://docs.mongodb.com/manual/release-notes/5.0-changelog/#std-label-5.0.4-changelog)
 
 ## Table of contents
@@ -52,7 +51,7 @@ Relevant testing information and libraries will be described in the appropriate 
 of this document.
 
 If you are not familiar with Gradle, the most relevant commands and tasks will be explained
-in the following sections. If you need further help, check its [documentation](https://docs.gradle.org/7.3.1/userguide/userguide.html)
+in the following sections. If you need further help, check its [documentation](https://docs.gradle.org/7.3.2/userguide/userguide.html)
 or execute the help task:
 
 ```shell
@@ -74,7 +73,7 @@ and consume the API.
 
 ## Language Version
 
-Gradle's [toolchain](https://docs.gradle.org/7.3.1/userguide/toolchains.html) concept is 
+Gradle's [toolchain](https://docs.gradle.org/7.3.2/userguide/toolchains.html) concept is 
 used in order to define which java version will be used to build the project. This is 
 declared in the [build.gradle.kts](build.gradle.kts) file:
 
@@ -93,7 +92,7 @@ machine in order to build this project.
 
 Don't worry! If a matching JDK is not found by Gradle on your machine, it will automatically
 download it before building the project. If you want Gradle to download a distribution JDK 
-from a specific vendor, you can do so by setting the [vendor property](https://docs.gradle.org/7.3.1/userguide/toolchains.html#sec:vendors)
+from a specific vendor, you can do so by setting the [vendor property](https://docs.gradle.org/7.3.2/userguide/toolchains.html#sec:vendors)
 in the [build.gradle.kts](build.gradle.kts) file:
 
 ```
@@ -313,7 +312,7 @@ docker pull quay.io/keycloak/keycloak:15.0.2
 ### What is JaCoCo?
 
 JaCoCo is an amazing tool that generates code coverage reports for java. In order to 
-generate these reports, the [JaCoCo Gradle plugin](https://docs.gradle.org/7.3.1/userguide/jacoco_plugin.html) 
+generate these reports, the [JaCoCo Gradle plugin](https://docs.gradle.org/7.3.2/userguide/jacoco_plugin.html) 
 is used, and is declared in the [build.gradle.kts](build.gradle.kts) plugins block. 
 
 The plugin provides two useful tasks: 
