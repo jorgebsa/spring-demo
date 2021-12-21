@@ -1,7 +1,7 @@
 plugins {
     `java-library`
     jacoco
-    id("org.springframework.boot") version "2.6.1"
+    id("org.springframework.boot") version "2.6.2"
     id("org.barfuin.gradle.jacocolog") version "2.0.0"
     id("info.solidsoft.pitest") version "1.7.0"
 }
